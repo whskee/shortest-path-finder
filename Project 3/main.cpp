@@ -14,35 +14,36 @@ int main() {
 
     // graph variables
     Graph *graph;
-    int V, E; // V and E represent the number of vertices and edges respectively
+    int n, m; // V and E represent the number of vertices and edges respectively
     int src, dest, weight;
 
-    //cin >> strInput;
-    //cin >> graphType;
-
-    graphType = "directed";
+    cin >> strInput;
+    cin >> graphType;
 
     // read graph from file
-    file.open("network01.txt");
+    file.open(strInput);
     if (file.is_open()) {
-        file >> V; // get number of vertices
-        file >> E; // get number of edges
-        graph = new Graph(V, E);
+        file >> n; // get number of vertices
+        file >> m; // get number of edges
+        graph = Initialize(n, m);
 
         // get input from file
         while (file >> input) {
             file >> src;
             file >> dest;
             file >> weight;
-            graph->addEdge(src, dest, weight);
+            addEdge(graph, src, dest, weight);
             if (graphType == "undirected") {
-                graph->addEdge(dest, src, weight);
+                addEdge(graph, dest, src, weight);
             }
         }
         file.close();
     } else {
         cout << "Error: cannot open file for reading\n";
+        exit(0);
     }
+    
+    printGraph(graph);
 
     while (1) {
         // get user input and pass by reference
@@ -59,6 +60,10 @@ int main() {
 
         if (command == "stop") {
             exit(0);
+        }
+        
+        if (command == "print graph") {
+            printGraph(graph);
         }
     }
 }
