@@ -3,39 +3,65 @@
 
 using namespace std;
 
+
 // function to initialize the graph
-Graph* Initialize(int n, int m) {
-    Graph* graph = new Graph;
-    graph->vertices = n;
-    //graph->Adj = new Node[n + 1];            // Adj[u] contains all vertices adjacent to u
-    graph->Adj = (Node**) calloc(n+1, sizeof(Node*));
-    graph->V = new Vertex[n + 1];
-    return graph;
+Graph::Graph(int n, int m) {
+    vertices = n;
+    Adj = (Node**) calloc(n+1, sizeof(Node*));           // Adj[u] contains all vertices adjacent to u
+    V = (Vertex*) calloc(n+1, sizeof(Vertex*));
 }
 
-// function to add an edge
-void addEdge(Graph *graph, int src, int dest) {
+// function to add unweighted edge
+void Graph::addEdge(int src, int dest) {
     Node *node = new Node;
     node->v = dest;
-    node->next = graph->Adj[src];
-    graph->Adj[src] = node;
+    node->next = Adj[src];
+    Adj[src] = node;
 }
 
-// function to add an edge
-void addEdge(Graph *graph, int src, int dest, int weight) {
+// function to add weighted edge
+void Graph::addEdge(int src, int dest, int weight) {
     Node *node = new Node;
     node->v = dest;
     node->w = weight;
-    node->next = graph->Adj[src];
-    graph->Adj[src] = node;
-    
-//    cout << "added<" << src << ", " << dest << ", " << weight << ">\n";
-//    cout << graph->Adj[src]->w << "\n";
+    node->next = Adj[src];
+    Adj[src] = node;
 }
 
-void printGraph(Graph *graph) {
-    for (int x = 1; x <= graph->vertices; x++) {
-        Node *temp = graph->Adj[x];
+//void Graph::relax(int u, int v, int w) {
+//    if (V[v].d > V[u].d + w) {
+//        V[v].d = V[u].d + w;
+//        V[v].pi = u;
+//        index = V[v].index;
+//        decreaseKey(heap, index, V[v].d);
+//    }
+//}
+
+//int Graph::performDijkstra(int weight, int src) {
+//    Q = initialize(vertices);
+//    for (int x = 1; x <= vertices; x++) {
+//        V[x].d = 0;
+//        V[x].color = 'W';
+//        V[x].pi = NULL;
+//    }
+//    V[src].d = 0;
+//    V[src].color = 'G';
+//    insert(Q, src);
+//    Vertex *u;
+//    while (Q != NULL) {
+//        u = extractMin(Q);
+//    }
+//    return 1;
+//}
+
+void Graph::initSingleSrce(int src) {
+    
+}
+
+// function to print adjacency list of G
+void Graph::printGraph() {
+    for (int x = 1; x <= vertices; x++) {
+        Node *temp = Adj[x];
         cout << x << ": ";
         while (temp != NULL) {
             cout << " --> " << temp->v;

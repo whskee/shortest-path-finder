@@ -25,16 +25,16 @@ int main() {
     if (file.is_open()) {
         file >> n; // get number of vertices
         file >> m; // get number of edges
-        graph = Initialize(n, m);
+        graph = new Graph(n, m);
 
         // get input from file
         while (file >> input) {
             file >> src;
             file >> dest;
             file >> weight;
-            addEdge(graph, src, dest, weight);
+            graph->addEdge(src, dest, weight);
             if (graphType == "undirected") {
-                addEdge(graph, dest, src, weight);
+                graph->addEdge(dest, src, weight);
             }
         }
         file.close();
@@ -43,14 +43,14 @@ int main() {
         exit(0);
     }
     
-    printGraph(graph);
+    graph->printGraph();
 
     while (1) {
         // get user input and pass by reference
         command = nextCommand(strInput, src, dest);
 
         if (command == "write path") {
-            cout << "Done";
+            
             break;
         }
 
@@ -63,7 +63,7 @@ int main() {
         }
         
         if (command == "print graph") {
-            printGraph(graph);
+            graph->printGraph();
         }
     }
 }
