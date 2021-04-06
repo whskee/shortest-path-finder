@@ -9,23 +9,24 @@ struct HeapNode {
 };
 
 // create a HEAP
-struct MinHeap {
-    int capacity;
+class MinHeap {
+public:
+int capacity;
     int size;
-    HeapNode *arr;
-};
+    HeapNode *H;
 
-// function declarations to be defined in heap.cpp
-MinHeap *initialize(int n);
-void buildHeap(MinHeap *element, int size);
-void insert(MinHeap *heap, HeapNode *element);
-void extractMin(MinHeap *heap);
-void decreaseKey(MinHeap *heap, int index, int value);
-void minHeapify(MinHeap *heap, int index);
-void writeHeap(MinHeap *heap);
-void printHeap(MinHeap *heap);
-void swap(int x, int y);
-int getLeft(int i);
-int getRight(int i);
-int getParent(int i);
-int getHeapifyCalls();
+    // function declarations to be defined in heap.cpp
+    MinHeap(int n);
+    void buildHeap(HeapNode *H, int size);
+    void insert(HeapNode *element);
+    void extractMin();
+    void decreaseKey(int index, int value);
+    void minHeapify(int index);
+    void printHeap();
+
+    // helper functions
+    void swap(int x, int y);
+    int getLeft(int i);
+    int getRight(int i);
+    int getParent(int i);
+};
