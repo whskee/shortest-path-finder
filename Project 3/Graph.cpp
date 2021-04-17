@@ -85,7 +85,7 @@ int Graph::performDijkstra(int flagFind, int s, int t) {
             } else if (V[v].d > V[u].d + temp->w) {
                 relax(u, v, temp->w);
 
-                Q->decreaseKey(V[v].index, V[v].d, flagFind);
+                Q->decreaseKey(V[v].index, V[v].d);
             }
             temp = temp->next;
         }
