@@ -31,17 +31,26 @@ void MinHeap::buildHeap(Element *arr, int size) {
 }
 
 // function to insert an element into heap
-void MinHeap::insert(int u, int key) {
+void MinHeap::insert(int u, float key, int &index, int flagFind) {
     if (size == capacity) {
         cout << "Overflow\n";
     } else {
         Element *newElement = new Element;
         newElement->u = u;
         newElement->key = key;
+
+        // increase the heap size and add the element
         size++;
         arr[size] = newElement;
-        //printHeap();
-        decreaseKey(size, key);
+
+        //set vertex index to heap
+        index = size;
+
+        // if flag=0, no min-heap operations are printed
+        if (flagFind == 1)
+            printf("Insert vertex %d, key=%12.4f\n", u, key);
+
+        minHeapify(1);
     }
 }
 
@@ -62,7 +71,7 @@ void MinHeap::decreaseKey(int index, int newKey) {
         arr[index]->key = newKey;
         while (index > 1 && arr[getParent(index)]->key > arr[index]->key) {
             swap(index, getParent(index));
-            
+
             // V[arr[index]->u]->index = index;
             // V[arr[index]->u]->pos = getParent(index);
             index = getParent(index);
