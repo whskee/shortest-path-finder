@@ -3,11 +3,17 @@
 
 using namespace std;
 
-// function to initialize the graph
+// parameterized constructor
 Graph::Graph(int n, int m) {
     vertices = n;
     Adj = (Node **)calloc(n + 1, sizeof(Node *)); // Adj[u] contains all vertices adjacent to u
     V = (Vertex *)calloc(n + 1, sizeof(Vertex *));
+}
+
+// destructor
+Graph::~Graph() {
+    delete Adj;
+    delete V;
 }
 
 // function to add unweighted edge
@@ -38,7 +44,7 @@ int Graph::performDijkstra(int w, int s) {
     initSingleSrce(s);
     Q = new MinHeap(vertices);
     Q->insert(s, V[s].d);
-    
+
     int u;
     while (Q != NULL) {
         u = Q->extractMin();

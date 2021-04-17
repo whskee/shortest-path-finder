@@ -5,12 +5,17 @@
 
 using namespace std;
 
-// function to intialize the heap
+// parameterized constructor
 MinHeap::MinHeap(int n) {
     arr = (Element **)calloc(n + 1, sizeof(Element *));
-    //arr = new Element[n + 1];
     capacity = n;
     size = 0;
+}
+
+// destructor
+MinHeap::~MinHeap() {
+    delete arr;
+    delete Q;
 }
 
 // function to build heap

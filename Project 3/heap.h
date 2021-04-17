@@ -14,16 +14,17 @@ public:
     Element **arr;
     MinHeap *Q;
 
-    // function declarations to be defined in heap.cpp
+    // constructor and destructor
     MinHeap(int n);
+    ~MinHeap();
+
+    // function to be implemented in heap.cpp
     void buildHeap(Element *arr, int size);
     void insert(int u, int key);
     int extractMin();
     void decreaseKey(int index, int newKey);
     void minHeapify(int index);
     void printHeap();
-
-    // helper functions
     void swap(int x, int y);
     int getLeft(int i);
     int getRight(int i);

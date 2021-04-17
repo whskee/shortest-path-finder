@@ -7,8 +7,12 @@ class Stack {
     int top;
 
 public:
-    int *a; // Maximum size of Stack
+    // constructor and destructor
     Stack();
+    ~Stack();
+
+    // functions to be implemented in stack.cpp
+    int *a;
     bool push(int x);
     int pop();
     int peek();
