@@ -21,7 +21,7 @@ public:
     // function to be implemented in heap.cpp
     void buildHeap(Element *arr, int size);
     void insert(int u, float key, int &index, int flagFind);
-    int extractMin();
+    int extractMin(int flagFind);
     void decreaseKey(int index, int newKey);
     void minHeapify(int index);
     void printHeap();

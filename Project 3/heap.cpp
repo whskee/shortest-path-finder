@@ -55,12 +55,26 @@ void MinHeap::insert(int u, float key, int &index, int flagFind) {
 }
 
 // function to delete minimum from heap
-int MinHeap::extractMin() {
-    arr[1]->key = arr[size]->key;
-    //cout << arr[1]->key;
-    size--;
-    minHeapify(1);
-    return arr[1]->key;
+int MinHeap::extractMin(int flagFind) {
+    if (size > 0) {
+        // no min-heap operations are printed if flag is 0
+        if (flagFind == 1)
+            printf("Delete vertex %d, key=%12.4f\n", arr[1]->u, arr[1]->key);
+
+        int u = arr[1]->u;
+
+        // remove element from heap and maintain heap data structure property
+        arr[1]->key = arr[size]->key;
+        arr[1]->u = arr[size]->u;
+        size--;
+        minHeapify(1);
+
+        arr[size + 1] = NULL;
+        return u;
+        
+    } else {
+        return 0;
+    }
 }
 
 // function to perform DecreaseKey on heap with index and value
