@@ -26,6 +26,9 @@ int main(int argc, char *argv[]) {
     float weight;
     int flag;
 
+    int source, destination; // from find command
+    int s, d;                // from 'write path' command
+
     cin >> strInput;
     cin >> graphType;
 
@@ -64,6 +67,8 @@ int main(int argc, char *argv[]) {
 
     graph->printGraph();
 
+    int validFindCommandFlag = 0;
+
     while (1) {
         // get user input and pass by reference
         command = nextCommand(strInput, src, dest, flag);
@@ -74,15 +79,41 @@ int main(int argc, char *argv[]) {
         }
 
         if (command == "find") {
+            // This query is valid if source ∈ V , destination is an integer not equal to source, and flag ∈{0,1}.
+            if ((src == dest) || (flag != 1 && flag != 0) || (!graph->isGraphVertex(src))) {
+                cout << "Error: invalid find query\n";
+                continue;
+            }
+
+            // store the src and dest for possible use in 'write path' command
+            source = src;
+            destination = dest;
+
+            // store flag value to be verified during printing
+            graph->flagFind = flag;
+
+            graph->performDijkstra(flag, src, dest);
+
+            // set the flag indicating valid find command is executed
+            validFindCommandFlag = 1;
             break;
         }
 
         if (command == "stop") {
+            // cout << "stop";
+            if (graph->Adj)
+                free(graph->Adj);
+            if (graph->Q->arr)
+                free(graph->Q->arr);
+            if (graph->Q)
+                free(graph->Q);
+            if (graph->V)
+                free(graph->V);
             exit(0);
         }
 
         if (command == "print graph") {
-            graph->printGraph();
+            //graph->printGraph();
         }
     }
 }
