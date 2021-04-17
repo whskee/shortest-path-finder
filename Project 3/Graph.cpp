@@ -116,3 +116,14 @@ void Graph::printGraph() {
         cout << "\n";
     }
 }
+
+bool Graph::isGraphVertex(int v) {
+    bool isVertex = false;
+    for (int x = 1; x <= vertices; x++) {
+        if (x == v) {
+            isVertex = true;
+            break;
+        }
+    }
+    return isVertex;
+}

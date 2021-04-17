@@ -37,4 +37,5 @@ public:
     void initSingleSrce(int src);
     void relax(int u, int v, float w);
     void printGraph();
+    bool isGraphVertex(int v);
 };
