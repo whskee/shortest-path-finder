@@ -24,6 +24,7 @@ public:
     Vertex *V;
     MinHeap *Q;
     int vertices;
+    int flagFind; // flag ∈{0,1}
 
     // constructor and destructor
     Graph(int n, int m);
@@ -32,8 +33,8 @@ public:
     // functions to be implemented in Graph.cpp
     void addEdge(int src, int dest);
     void addEdge(int src, int dest, float w);
-    int performDijkstra(int weight, int src);
+    int performDijkstra(int flagFind, int s, int t);
     void initSingleSrce(int src);
-    void relax(int u, int v, int w);
+    void relax(int u, int v, float w);
     void printGraph();
 };

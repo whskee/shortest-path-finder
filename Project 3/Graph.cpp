@@ -33,43 +33,64 @@ void Graph::addEdge(int s, int dest, float w) {
     Adj[s] = node;
 }
 
-void Graph::relax(int u, int v, int w) {
+void Graph::relax(int u, int v, float w) {
     if (V[v].d > V[u].d + w) {
+        float fVal = V[u].d + w;
+
+        // no min-heap operations are printed if flag is 0
+        if (flagFind)
+            printf("Decrease key of vertex %d, from %12.4f to %12.4f\n", v, V[v].d, fVal);
+
         V[v].d = V[u].d + w;
         V[v].pi = u;
     }
 }
 
-int Graph::performDijkstra(int w, int s) {
+// function to perform DFS on graph
+int Graph::performDijkstra(int flagFind, int s, int t) {
+    // initialize the min-heap with only the source vertex s
     initSingleSrce(s);
+
+    //Insert s into initially empty Q
     Q = new MinHeap(vertices);
-    Q->insert(s, V[s].d);
+
+    Q->insert(s, V[s].d, V[s].index, flagFind);
 
     int u;
-    while (Q != NULL) {
-        u = Q->extractMin();
-        V[u].color = 'B';
 
-        if (u == t) {
+    while ((Q != NULL) && (Q->size > 0)) {
+        u = Q->extractMin(flagFind);
+
+        if (u == 0)
             return 0;
+        //u is removed from heap, hence set its index to 0
+        V[u].index = 0;
+
+        if (Q->size > 0) {
+            V[Q->arr[1]->u].index = 1;
+        }
+        if (u == t) {
+            return 1;
         }
 
         Node *temp = Adj[u];
 
         while (temp != NULL) {
-            v = temp->v;
+            int v = temp->v;
             if (V[v].color == 'W') {
                 V[v].d = V[u].d + temp->w;
                 V[v].pi = u;
                 V[v].color = 'G';
-                Q->insert(v, V[v].d);
+                Q->insert(v, V[v].d, V[v].index, flagFind);
             } else if (V[v].d > V[u].d + temp->w) {
                 relax(u, v, temp->w);
+
+                Q->decreaseKey(V[v].index, V[v].d, flagFind);
             }
             temp = temp->next;
         }
-        Q->printHeap();
-    }
+        V[u].color = 'B';
+    };
     return 1;
 }
 
