@@ -1,26 +1,25 @@
 #pragma once
 
-#include <string>
-using namespace std;
-
 // struct elements for the head
-struct HeapNode {
+struct Element {
+    int u;
     int key;
 };
 
 // create a HEAP
 class MinHeap {
 public:
-int capacity;
+    int capacity;
     int size;
-    HeapNode *H;
+    Element **arr;
+    MinHeap *Q;
 
     // function declarations to be defined in heap.cpp
     MinHeap(int n);
-    void buildHeap(HeapNode *H, int size);
-    void insert(HeapNode *element);
-    void extractMin();
-    void decreaseKey(int index, int value);
+    void buildHeap(Element *arr, int size);
+    void insert(int u, int key);
+    int extractMin();
+    void decreaseKey(int index, int newKey);
     void minHeapify(int index);
     void printHeap();
 

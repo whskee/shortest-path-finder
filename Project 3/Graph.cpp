@@ -3,59 +3,78 @@
 
 using namespace std;
 
-
 // function to initialize the graph
 Graph::Graph(int n, int m) {
     vertices = n;
-    Adj = (Node**) calloc(n+1, sizeof(Node*));           // Adj[u] contains all vertices adjacent to u
-    V = (Vertex*) calloc(n+1, sizeof(Vertex*));
+    Adj = (Node **)calloc(n + 1, sizeof(Node *)); // Adj[u] contains all vertices adjacent to u
+    V = (Vertex *)calloc(n + 1, sizeof(Vertex *));
 }
 
 // function to add unweighted edge
-void Graph::addEdge(int src, int dest) {
+void Graph::addEdge(int s, int dest) {
     Node *node = new Node;
     node->v = dest;
-    node->next = Adj[src];
-    Adj[src] = node;
+    node->next = Adj[s];
+    Adj[s] = node;
 }
 
 // function to add weighted edge
-void Graph::addEdge(int src, int dest, int weight) {
+void Graph::addEdge(int s, int dest, float w) {
     Node *node = new Node;
     node->v = dest;
-    node->w = weight;
-    node->next = Adj[src];
-    Adj[src] = node;
+    node->w = w;
+    node->next = Adj[s];
+    Adj[s] = node;
 }
 
-//void Graph::relax(int u, int v, int w) {
-//    if (V[v].d > V[u].d + w) {
-//        V[v].d = V[u].d + w;
-//        V[v].pi = u;
-//        index = V[v].index;
-//        decreaseKey(heap, index, V[v].d);
-//    }
-//}
+void Graph::relax(int u, int v, int w) {
+    if (V[v].d > V[u].d + w) {
+        V[v].d = V[u].d + w;
+        V[v].pi = u;
+    }
+}
 
-//int Graph::performDijkstra(int weight, int src) {
-//    Q = initialize(vertices);
-//    for (int x = 1; x <= vertices; x++) {
-//        V[x].d = 0;
-//        V[x].color = 'W';
-//        V[x].pi = NULL;
-//    }
-//    V[src].d = 0;
-//    V[src].color = 'G';
-//    insert(Q, src);
-//    Vertex *u;
-//    while (Q != NULL) {
-//        u = extractMin(Q);
-//    }
-//    return 1;
-//}
-
-void Graph::initSingleSrce(int src) {
+int Graph::performDijkstra(int w, int s) {
+    initSingleSrce(s);
+    Q = new MinHeap(vertices);
+    Q->insert(s, V[s].d);
     
+    int u;
+    while (Q != NULL) {
+        u = Q->extractMin();
+        V[u].color = 'B';
+
+        if (u == t) {
+            return 0;
+        }
+
+        Node *temp = Adj[u];
+
+        while (temp != NULL) {
+            v = temp->v;
+            if (V[v].color == 'W') {
+                V[v].d = V[u].d + temp->w;
+                V[v].pi = u;
+                V[v].color = 'G';
+                Q->insert(v, V[v].d);
+            } else if (V[v].d > V[u].d + temp->w) {
+                relax(u, v, temp->w);
+            }
+            temp = temp->next;
+        }
+        Q->printHeap();
+    }
+    return 1;
+}
+
+void Graph::initSingleSrce(int s) {
+    for (int x = 1; x <= vertices; x++) {
+        V[x].d = 0;
+        V[x].color = 'W';
+        V[x].pi = NULL;
+    }
+    V[s].d = 0;
+    V[s].color = 'G';
 }
 
 // function to print adjacency list of G

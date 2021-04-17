@@ -42,7 +42,7 @@ int main() {
         cout << "Error: cannot open file for reading\n";
         exit(0);
     }
-    
+
     graph->printGraph();
 
     while (1) {
@@ -50,7 +50,7 @@ int main() {
         command = nextCommand(strInput, src, dest);
 
         if (command == "write path") {
-            
+
             break;
         }
 
@@ -61,7 +61,7 @@ int main() {
         if (command == "stop") {
             exit(0);
         }
-        
+
         if (command == "print graph") {
             graph->printGraph();
         }
