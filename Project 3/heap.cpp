@@ -71,7 +71,7 @@ int MinHeap::extractMin(int flagFind) {
 
         arr[size + 1] = NULL;
         return u;
-        
+
     } else {
         return 0;
     }
@@ -80,14 +80,11 @@ int MinHeap::extractMin(int flagFind) {
 // function to perform DecreaseKey on heap with index and value
 void MinHeap::decreaseKey(int index, int newKey) {
     if (index < 1 || index > size || index >= arr[index]->key) {
-        printf("Error in DecreaseKey\n");
+        // printf("Error in DecreaseKey\n");
     } else {
         arr[index]->key = newKey;
         while (index > 1 && arr[getParent(index)]->key > arr[index]->key) {
             swap(index, getParent(index));
-
-            // V[arr[index]->u]->index = index;
-            // V[arr[index]->u]->pos = getParent(index);
             index = getParent(index);
         }
     }
