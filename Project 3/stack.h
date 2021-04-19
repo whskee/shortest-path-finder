@@ -11,8 +11,9 @@ public:
     Stack();
     ~Stack();
 
-    // functions to be implemented in stack.cpp
     int *a;
+    
+    // functions to be implemented in stack.cpp
     bool push(int x);
     int pop();
     int peek();
