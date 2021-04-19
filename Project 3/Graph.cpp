@@ -133,7 +133,7 @@ void Graph::initSingleSrce(int s) {
     for (int x = 1; x <= vertices; x++) {
         V[x].d = 0;
         V[x].color = 'W';
-        V[x].pi = NULL;
+        V[x].pi = 0;
     }
     V[s].d = 0;
     V[s].color = 'G';
