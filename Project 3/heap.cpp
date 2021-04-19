@@ -15,6 +15,13 @@ MinHeap::MinHeap() {
 
 // parameterized constructor
 MinHeap::MinHeap(int n) {
+    arr = (Element **)calloc(n + 1, sizeof(Element *));
+    capacity = n;
+    size = 0;
+}
+
+// destructor
+MinHeap::~MinHeap() {
     //delete arr
     for (int i = 0; i < capacity; i++) {
         if (arr[i])
@@ -22,12 +29,6 @@ MinHeap::MinHeap(int n) {
     }
     if (arr)
         delete arr;
-}
-
-// destructor
-MinHeap::~MinHeap() {
-    delete arr;
-    delete Q;
 }
 
 // function to build heap
