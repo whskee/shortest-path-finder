@@ -5,11 +5,23 @@
 
 using namespace std;
 
+// default constructor
+MinHeap::MinHeap() {
+    arr = NULL;
+    capacity = 0;
+    size = 0;
+    Q = NULL;
+}
+
 // parameterized constructor
 MinHeap::MinHeap(int n) {
-    arr = (Element **)calloc(n + 1, sizeof(Element *));
-    capacity = n;
-    size = 0;
+    //delete arr
+    for (int i = 0; i < capacity; i++) {
+        if (arr[i])
+            delete arr[i];
+    }
+    if (arr)
+        delete arr;
 }
 
 // destructor

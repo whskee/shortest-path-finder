@@ -15,6 +15,7 @@ public:
     MinHeap *Q;
 
     // constructor and destructor
+    MinHeap();
     MinHeap(int n);
     ~MinHeap();
 
