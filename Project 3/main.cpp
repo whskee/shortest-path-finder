@@ -29,6 +29,7 @@ int main(int argc, char *argv[]) {
     int source, destination; // from find command
     int s, d;                // from 'write path' command
 
+    // read command line arguments
     if (argc > 0) {
         strInput = argv[1];
         graphType = argv[2];
@@ -83,7 +84,6 @@ int main(int argc, char *argv[]) {
             }
 
             graph->computeShortestPath(s, d, destination);
-            break;
         }
 
         if (command == "find") {
@@ -99,15 +99,6 @@ int main(int argc, char *argv[]) {
 
             // store flag value to be verified during printing
             graph->flagFind = flag;
-
-            //Do we need to initialize Vertex Array?TBD
-            int verIndex;
-            for (verIndex = 1; verIndex <= graph->vertices; verIndex++) {
-                graph->V[verIndex].color = 'W';
-                graph->V[verIndex].d = 0;
-                graph->V[verIndex].pi = 0;
-                graph->V[verIndex].index = 0;
-            }
 
             graph->performDijkstra(flag, src, dest);
 
