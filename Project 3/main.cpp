@@ -99,22 +99,26 @@ int main(int argc, char *argv[]) {
             // store flag value to be verified during printing
             graph->flagFind = flag;
 
+            //Do we need to initialize Vertex Array?TBD
+            int verIndex;
+            for (verIndex = 1; verIndex <= graph->vertices; verIndex++) {
+                graph->V[verIndex].color = 'W';
+                graph->V[verIndex].d = 0;
+                graph->V[verIndex].pi = 0;
+                graph->V[verIndex].index = 0;
+            }
+
             graph->performDijkstra(flag, src, dest);
 
             // set the flag indicating valid find command is executed
             validFindCommandFlag = 1;
-            break;
         }
 
         if (command == "stop") {
-            if (graph->Adj)
-                free(graph->Adj);
-            if (graph->Q->arr)
-                free(graph->Q->arr);
-            if (graph->Q)
-                free(graph->Q);
-            if (graph->V)
-                free(graph->V);
+            //delete graph. graph object is allocated with new in main
+            if (graph)
+                delete graph;
+
             exit(0);
         }
     }
