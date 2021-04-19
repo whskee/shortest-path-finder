@@ -1,7 +1,17 @@
 #include "Graph.h"
+#include "stack.h"
 #include <iostream>
 
 using namespace std;
+
+// default constructor
+Graph::Graph() {
+    vertices = 0;
+    Adj = NULL; // Adj[u] contains all vertices adjacent to u
+    V = NULL;
+    Q = NULL;
+    flagFind = 0;
+}
 
 // parameterized constructor
 Graph::Graph(int n, int m) {
@@ -12,8 +22,33 @@ Graph::Graph(int n, int m) {
 
 // destructor
 Graph::~Graph() {
-    delete Adj;
-    delete V;
+    // Adj is allocated with calloc in constructor(Node **)
+    // use free to deallocate it
+    for (int x = 0; x <= vertices; x++) {
+        Node *temp = Adj[x];
+        while (temp != NULL) {
+            Node *current = temp;
+
+            temp = temp->next;
+            delete current;
+            current = NULL;
+        }
+
+        Adj[x] = NULL;
+    }
+    if (Adj)
+        free(Adj);
+
+    // V is allocated with calloc in constructor (Vertex *)
+    // use free to deallocate it
+    if (V) {
+        delete V;
+    }
+
+    // Q is allocated in performDijkstraVariant with new operator (MinHeap *Q)
+    // use delete to deallocate it
+    if (Q)
+        delete Q;
 }
 
 // function to add unweighted edge
@@ -127,3 +162,4 @@ bool Graph::isGraphVertex(int v) {
     }
     return isVertex;
 }
+
