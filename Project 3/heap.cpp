@@ -18,11 +18,12 @@ MinHeap::MinHeap(int n) {
     arr = (Element **)calloc(n + 1, sizeof(Element *));
     capacity = n;
     size = 0;
+    Q = NULL;
 }
 
 // destructor
 MinHeap::~MinHeap() {
-    //delete arr
+    // delete arr
     for (int i = 0; i < capacity; i++) {
         if (arr[i])
             delete arr[i];
@@ -90,7 +91,7 @@ int MinHeap::extractMin(int flagFind) {
 }
 
 // function to perform DecreaseKey on heap with index and value
-void MinHeap::decreaseKey(int index, int newKey) {
+void MinHeap::decreaseKey(int index, float newKey) {
     if (index < 1 || index > size || index >= arr[index]->key) {
         // printf("Error in DecreaseKey\n");
     } else {
@@ -125,6 +126,7 @@ void MinHeap::minHeapify(int index) {
 
 // function to print contents of the heap
 void MinHeap::printHeap() {
+    cout << "Heap: ";
     cout << "capacity=" << capacity << ", "
          << "size=" << size << endl;
     if (size != 0) {
@@ -157,5 +159,5 @@ int MinHeap::getRight(int i) {
 
 // function to return the parent index of the specified index i
 int MinHeap::getParent(int i) {
-    return floor(i / 2);
+    return (int)floor(i / 2);
 }

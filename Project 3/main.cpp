@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
         cin >> graphType;
     }
 
-    if (file.is_open()) {
+    if (file) {
         file >> n; // get number of vertices
         file >> m; // get number of edges
         graph = new Graph(n, m);
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
         }
 
         if (command == "find") {
-            // This query is valid if source ∈ V , destination is an integer not equal to source, and flag ∈{0,1}.
+            // this query is valid if source ∈ V , destination is an integer not equal to source, and flag ∈{0,1}.
             if ((src == dest) || (flag != 1 && flag != 0) || (!graph->isGraphVertex(src))) {
                 cout << "Error: invalid find query\n";
                 continue;
