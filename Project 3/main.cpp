@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
         exit(0);
     }
 
-    graph->printGraph();
+    //graph->printGraph();
 
     int validFindCommandFlag = 0;
 
@@ -71,7 +71,22 @@ int main(int argc, char *argv[]) {
         command = nextCommand(strInput, src, dest, flag);
 
         if (command == "write path") {
+            // write path <s> <d>
+            // store s and d
+            s = src;
+            d = dest;
 
+            if (validFindCommandFlag == 0) {
+                cout << "Error: no path computation done\n";
+                continue; // wait for the next query
+            }
+            //If s != source or d not ∈ V \{s}, your program should write a message to stdout using the following format and wait for the next query.
+            else if ((s != source) || (!graph->isGraphVertex(d))) {
+                cout << "Error: invalid source destination pair\n";
+                continue; //wait for the next query
+            }
+
+            graph->computeShortestPath(s, d, destination);
             break;
         }
 
