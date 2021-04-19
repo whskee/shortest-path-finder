@@ -75,7 +75,8 @@ int main(int argc, char *argv[]) {
                 cout << "Error: no path computation done\n";
                 continue; // wait for the next query
             }
-            //If s != source or d not ∈ V \{s}, your program should write a message to stdout using the following format and wait for the next query.
+
+            // if s != source or d not ∈ V \{s}, your program should write a message to stdout using the following format and wait for the next query.
             else if ((s != source) || (!graph->isGraphVertex(d))) {
                 cout << "Error: invalid source destination pair\n";
                 continue; //wait for the next query
