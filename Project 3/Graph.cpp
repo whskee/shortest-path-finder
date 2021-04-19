@@ -17,7 +17,8 @@ Graph::Graph() {
 Graph::Graph(int n, int m) {
     vertices = n;
     Adj = (Node **)calloc(n + 1, sizeof(Node *)); // Adj[u] contains all vertices adjacent to u
-    V = (Vertex *)calloc(n + 1, sizeof(Vertex *));
+    V = (Vertex *)calloc(n + 1, sizeof(Vertex));
+    Q = NULL;
 }
 
 // destructor
@@ -86,7 +87,7 @@ int Graph::performDijkstra(int flagFind, int s, int t) {
     // initialize the min-heap with only the source vertex s
     initSingleSrce(s);
 
-    //Insert s into initially empty Q
+    // insert s into initially empty Q
     Q = new MinHeap(vertices);
 
     Q->insert(s, V[s].d, V[s].index, flagFind);
@@ -98,7 +99,7 @@ int Graph::performDijkstra(int flagFind, int s, int t) {
 
         if (u == 0)
             return 0;
-        //u is removed from heap, hence set its index to 0
+        // u is removed from heap, hence set its index to 0
         V[u].index = 0;
 
         if (Q->size > 0) {
