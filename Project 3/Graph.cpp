@@ -163,3 +163,55 @@ bool Graph::isGraphVertex(int v) {
     return isVertex;
 }
 
+// function to compute the shortest path
+bool Graph::computeShortestPath(int s, int d, int findCommandDestination) {
+    class Stack stack;
+    int temp = d;
+
+    while (temp != 0) {
+        stack.push(temp);
+        temp = V[temp].pi;
+        if (temp == s)
+            break;
+    }
+    if (temp != 0 && temp == s) {
+        stack.push(temp);
+
+        string pathShortest = "Shortest path: ";
+        string pathNotKnownTobeShortest = "Path not known to be shortest: ";
+
+        string pathString;
+
+        //if find command destination is vertex not in graph vertices, then shortest path is ensured
+        //since current graph vertices are numbered from 1 to 8, any destination vertex > 8 or < 0 would
+        //ensure shortest path
+        if (findCommandDestination > vertices || findCommandDestination < 0 || d == findCommandDestination)
+            pathString = pathShortest;
+        else
+            pathString = pathNotKnownTobeShortest;
+
+        cout << pathString << "<";
+        while (!stack.isEmpty()) {
+            // print top element in stack
+            cout << stack.peek();
+
+            // remove top element in stack
+            stack.pop();
+
+            if (!stack.isEmpty())
+                cout << ", ";
+        }
+        cout << ">\n";
+
+        printf("The path weight is: % 12.4f\n", V[d].d);
+
+        return 1;
+    } else if ((temp == 0) && (temp != s) && (findCommandDestination > vertices)) {
+        printf("No %d-%d path exists.\n", s, d);
+        return 0;
+    } else if ((temp == 0) && (temp != s) && (findCommandDestination <= vertices)) {
+        printf("No %d-%d path has been computed.\n", s, d);
+        return 0;
+    }
+    return 0;
+}

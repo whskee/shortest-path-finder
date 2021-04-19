@@ -27,7 +27,7 @@ public:
     int flagFind; // flag ∈{0,1}
 
     // constructor and destructor
-
+    Graph();
     Graph(int n, int m);
     ~Graph();
 
