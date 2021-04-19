@@ -39,5 +39,5 @@ public:
     void relax(int u, int v, float w);
     void printGraph();
     bool isGraphVertex(int v);
-    bool computeShortestPath(int s, int d, int findCommandDestination)
+    bool computeShortestPath(int s, int d, int findCommandDestination);
 };
