@@ -29,9 +29,6 @@ int main(int argc, char *argv[]) {
     int source, destination; // from find command
     int s, d;                // from 'write path' command
 
-    // read graph from file
-    file.open(strInput);
-
     if (argc > 0) {
         strInput = argv[1];
         graphType = argv[2];
@@ -61,8 +58,6 @@ int main(int argc, char *argv[]) {
         cout << "Error: cannot open file for reading\n";
         exit(0);
     }
-
-    //graph->printGraph();
 
     int validFindCommandFlag = 0;
 
@@ -112,7 +107,6 @@ int main(int argc, char *argv[]) {
         }
 
         if (command == "stop") {
-            // cout << "stop";
             if (graph->Adj)
                 free(graph->Adj);
             if (graph->Q->arr)
@@ -122,10 +116,6 @@ int main(int argc, char *argv[]) {
             if (graph->V)
                 free(graph->V);
             exit(0);
-        }
-
-        if (command == "print graph") {
-            //graph->printGraph();
         }
     }
 }
