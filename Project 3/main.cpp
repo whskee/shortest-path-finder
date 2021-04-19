@@ -29,9 +29,6 @@ int main(int argc, char *argv[]) {
     int source, destination; // from find command
     int s, d;                // from 'write path' command
 
-    cin >> strInput;
-    cin >> graphType;
-
     // read graph from file
     file.open(strInput);
 
