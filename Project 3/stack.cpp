@@ -5,11 +5,13 @@
 
 using namespace std;
 
+// constructor
 Stack::Stack() {
-    a = new int[0x7ffff];
+    a = new int[MAX];
     top = -1;
 }
 
+// destructor
 Stack::~Stack() {
     delete a;
 }
