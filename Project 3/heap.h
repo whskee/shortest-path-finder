@@ -3,7 +3,7 @@
 // struct elements for the head
 struct Element {
     int u;
-    int key;
+    float key;
 };
 
 // create a HEAP
