@@ -3,5 +3,5 @@
 
 using namespace std;
 
-// function declaration to be defined in util.cpp
+// function to get user input and evaluate it
 string nextCommand(string &strInput, int &src, int &dest, int &flag);
