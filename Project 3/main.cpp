@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
         }
 
         if (command == "stop") {
-            //delete graph. graph object is allocated with new in main
+            // delete graph. graph object is allocated with new in main
             if (graph)
                 delete graph;
 
