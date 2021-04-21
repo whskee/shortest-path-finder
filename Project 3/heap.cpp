@@ -83,6 +83,7 @@ int MinHeap::extractMin(int flagFind) {
         size--;
         minHeapify(1);
 
+        delete arr[size + 1];
         arr[size + 1] = NULL;
         return u;
     } else {
